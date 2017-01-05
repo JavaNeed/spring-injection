@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	
+	<!-- Simple Way -->
+	<!-- <bean id="requestProcessor" class="com.injection.testing.RequestProcessor">
+		<property name="validator" ref="validator" />
+	</bean>
+	
+	<bean id="validator" class="com.injection.testing.RequestValidator" scope="prototype" /> -->
+	
+	
+	<!-- Lookup way  -->
+	<bean id="requestProcessor" class="com.injection.testing.RequestProcessor" >
+		<lookup-method name="createValidator" bean="validator" />
+	</bean>
+	
+	<bean id="validator" class="com.injection.testing.RequestValidator" scope="prototype" />
+	
+	
+	<!-- Scoped Proxies: -->
+	<!-- <bean id="requestProcessor" class="com.injection.testing.RequestProcessor">
+    	<property name="validator" ref="validator"/>
+	</bean>
+ 
+	<bean id="validator" scope="prototype" class="com.injection.testing.RequestValidator">
+	   	This instructs the container to proxy the current bean
+	    <aop:scoped-proxy proxy-target-class="false" />
+	</bean> -->
+	
+	
+	<bean id="customerService" class="com.injection.mkyong.CustomerService" scope="prototype" />
+	
+</beans>
